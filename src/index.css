@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #c8dada;
 }
 
 code {
@@ -23,12 +24,13 @@ code {
 }
 
 .calendar {
+  padding: 1rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  background-color: #c8dada;
+
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -39,4 +41,31 @@ code {
   background: #9bd7d5;
   border-radius: 4px;
   line-height: 2;
+  cursor: pointer;
+}
+
+.heading-h1 {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 0.5rem 0;
+  width: 80%;
+  border-bottom: 2px solid #cababa;
+}
+
+.commit-details-2 {
+  width: 60%;
+  margin: 0 auto;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }

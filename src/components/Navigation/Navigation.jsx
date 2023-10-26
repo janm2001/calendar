@@ -17,8 +17,8 @@ const Navigation = () => {
         </Typography>
       </Grid>
       <Grid item gap={4}>
-        <Link href="/" underline="none" mx={1}>
-          Home
+        <Link href="/commits" underline="none" mx={1}>
+          Commits
         </Link>
         <Link href="/calendar" underline="none" mx={1}>
           Calendar

@@ -1,59 +1,32 @@
-import React, { useState } from "react";
-import Calendar from "react-calendar";
-import Commits from "../components/Commits/Commits";
-import "react-calendar/dist/Calendar.css";
+import React from "react";
+import { useQuery } from "react-query";
+import axiosClient from "../api/Api";
+
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 function CalendarPage() {
-  // Array to store month string values
-  const allMonthValues = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  // State for date selected by user
-  const [selectedDate, setSelectedDate] = useState();
-
-  // State for text above calander
-  const [calendarText, setCalendarText] = useState(`No Date is selected`);
-
-  // Function to update selected date and calander text
-  const handleDateChange = (value) => {
-    setSelectedDate(value);
-    setCalendarText(`The selected Date is ${value.toDateString()}`);
-  };
-
-  // Function to handle selected Year change
-  const handleYearChange = (value) => {
-    const yearValue = value.getFullYear();
-    setCalendarText(`${yearValue} Year  is selected`);
-  };
-
-  // Function to handle selected Month change
-  const handleMonthChange = (value) => {
-    const monthValue = allMonthValues[value.getMonth()];
-    setCalendarText(`${monthValue} Month  is selected`);
-  };
+  const localizer = momentLocalizer(moment);
+  const owner = "janm2001";
+  const repo = "SpotASpot";
+  const qCommits = useQuery(["commits"], () =>
+    axiosClient.get(`/repos/${owner}/${repo}/commits`)
+  );
 
   return (
     <div className="calendar">
-      <h2 className="calander-details">{calendarText}</h2>
       <Calendar
-        onClickMonth={handleMonthChange}
-        onClickYear={handleYearChange}
-        onChange={handleDateChange}
-        value={selectedDate}
+        localizer={localizer}
+        defaultDate={new Date("2023-06-06")}
+        defaultView="month"
+        events={qCommits.data?.data.map((item) => ({
+          start: item.commit?.author.date,
+          end: item.commit?.author.date,
+          title: item.commit?.message,
+        }))}
+        style={{ height: "100vh" }}
       />
-      <Commits selectedDate={selectedDate} />
     </div>
   );
 }

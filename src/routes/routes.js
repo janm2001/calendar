@@ -1,5 +1,7 @@
 const routes = {
   home: "/",
+  commits: "/commits",
+  commit: "/commits/:sha",
   calendar: "/calendar",
 };
 

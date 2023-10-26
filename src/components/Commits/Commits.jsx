@@ -1,11 +1,11 @@
 import React from "react";
 import { useQuery } from "react-query";
 import axiosClient from "../../api/Api";
-import CommitDetails from "./CommitDetails";
+import CommitsDetails from "./CommitsDetails";
+import { owner } from "../../api/ApiVar";
+import { repo } from "../../api/ApiVar";
 
-const Commits = ({ selectedDate }) => {
-  const owner = "janm2001";
-  const repo = "SpotASpot";
+const Commits = () => {
   const qCommits = useQuery(["commits"], () =>
     axiosClient.get(`/repos/${owner}/${repo}/commits`)
   );
@@ -23,7 +23,7 @@ const Commits = ({ selectedDate }) => {
     content = (
       <>
         {qCommits?.data.data.map((item) => (
-          <CommitDetails item={item} />
+          <CommitsDetails item={item} />
         ))}
       </>
     );
